@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: nhasa
+Build-Jdk: 19.0.1
+Implementation-Title: Spring Boot JDBC
+Implementation-Version: 1.0
+Implementation-Vendor-Id: org.springframework.boot
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/spring-jdbc
+Created-By: Maven Integration for Eclipse
+
