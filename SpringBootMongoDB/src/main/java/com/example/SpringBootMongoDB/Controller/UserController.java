@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 public class UserController {
@@ -59,6 +60,23 @@ public class UserController {
         user.setId(id);
         user.setName(name);
         user.setAge(age);
+        service.updateUser(user);
+    }
+
+    @PatchMapping("/user/{id}")
+    public void partialUpdateUser(@PathVariable String id,@RequestBody Map<String,String>body){
+         User user=service.getUser(id); // Selecting a Particular User
+         Set<String> keys = body.keySet();
+        for(String tmpKey:keys){
+            if(tmpKey.equalsIgnoreCase("name")){
+                String name = body.get("name");
+                user.setName(name);
+            }
+            else if(tmpKey.equalsIgnoreCase("age")){
+                int age = Integer.parseInt(body.get("age"));
+                user.setAge(age);
+            }
+        }
         service.updateUser(user);
     }
 }
