@@ -9,19 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Map;
-
 @RestController
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @PostMapping("/employeeDTO")
+   @PostMapping("/employeeDTO")
     @ResponseStatus(value = HttpStatus.CREATED)
     public Mono<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDto){
         return employeeService.saveEmployeeDTO(employeeDto);
     }
-
     @GetMapping("/employeeDTO")
     @ResponseStatus(value = HttpStatus.FOUND)
     public Flux<EmployeeDTO> getAllEmployess()
@@ -33,18 +30,18 @@ public class EmployeeController {
     @ResponseStatus(value = HttpStatus.FOUND)
     public Mono<Employee> getEmployee(@PathVariable String id)
     {
-        return employeeService.getEmployee(id);
+        return employeeService.getEmployee(id.trim());
     }
 
     @PutMapping("/employeeDTO/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public Mono<EmployeeDTO> updateEmployeeDTO(@RequestBody EmployeeDTO employeeDTO,@PathVariable String id){
-        return employeeService.updateEmployeeDTO(employeeDTO,id);
+        return employeeService.updateEmployeeDTO(employeeDTO,id.trim());
     }
 
     @DeleteMapping("/employee/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public Mono<Void>  deleteEmployee(@PathVariable String id){
-        return employeeService.deleteEmployee(id);
+        return employeeService.deleteEmployee(id.trim());
     }
 }

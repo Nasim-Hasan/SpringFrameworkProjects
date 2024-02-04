@@ -35,15 +35,17 @@ public class EmployeeService {
     public Mono<EmployeeDTO> updateEmployeeDTO(EmployeeDTO employeeDTO,String employeeId)
     {
         Mono<Employee> employeeMono = employeeRepository.findById(employeeId);
-        if(employeeMono.hasElement().equals(employeeId)){
-        return employeeMono.flatMap((existingEmployee) -> {
-            existingEmployee.setFirstName(employeeDTO.getFirstName());
-            existingEmployee.setLastName(employeeDTO.getLastName());
-            existingEmployee.setEmail(employeeDTO.getEmail());
-            return employeeRepository.save(existingEmployee);
-        }).map((employee -> EmployeeMapper.mapToEmployeeDto(employee)));
+        Mono<Boolean> employeeMonoPresent = employeeMono.hasElement();
+
+        if(employeeMonoPresent.share().block()) {
+            return employeeMono.flatMap((existingEmployee) -> {
+                existingEmployee.setFirstName(employeeDTO.getFirstName());
+                existingEmployee.setLastName(employeeDTO.getLastName());
+                existingEmployee.setEmail(employeeDTO.getEmail());
+                return employeeRepository.save(existingEmployee);
+            }).map((employee -> EmployeeMapper.mapToEmployeeDto(employee)));
         }
-        else {
+        else{
             Employee employee = EmployeeMapper.mapToEmployee(employeeDTO);
             Mono<Employee> savedEmployee = employeeRepository.save(employee);
             return savedEmployee.map((employeeEntity) -> EmployeeMapper.mapToEmployeeDto(employeeEntity));
