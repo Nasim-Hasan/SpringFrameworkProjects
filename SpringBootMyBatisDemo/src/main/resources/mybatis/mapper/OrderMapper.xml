@@ -1,0 +1,24 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.SpringBootMyBatisDemo.Domain.OrderMapper">
+
+    <resultMap id="OrderResultMap" type="Order">
+        <id column="id" property="id" />
+        <result column="address" property="address" />
+        <result column="date" property="date" />
+    </resultMap>
+
+    <select id="findAllOrders" resultMap="OrderResultMap">
+        select id, address, date from order_details
+    </select>
+
+    <select id="findOrderById" parameterType="Integer" resultMap="OrderResultMap">
+        select id, address, date from order_details WHERE id=#{id}
+    </select>
+
+    <insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
+        insert into order_details(address,date) values(#{address},#{date})
+    </insert>
+</mapper>
