@@ -31,9 +31,9 @@ public class SpringBootMyBatisDemoApplication  implements CommandLineRunner {
 		System.out.println("A Particular Order:");
 		System.out.println("Address:"+particularOrder.getAddress()+" Date:"+particularOrder.getDate());
 
-		orderMapper.insertOrder(new Order("Lisbon","2024-02-17"));
+		orderMapper.insertOrder(new Order("Madrid","2024-02-18"));
 		System.out.println("Inserted an Order.");
-		System.out.println("Order Address:"+new Order("Lisbon","2024-02-17").getAddress()+" Order Date:"+new Order("Los Angeles","2024-02-17").getDate());
+		System.out.println("Order Address:"+new Order("Madrid","2024-02-18").getAddress()+" Order Date:"+new Order("Madrid","2024-02-18").getDate());
 
 	}
 
