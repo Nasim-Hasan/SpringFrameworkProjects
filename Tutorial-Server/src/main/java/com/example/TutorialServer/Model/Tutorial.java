@@ -10,6 +10,7 @@ public class Tutorial {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private long id;
 
     @Column(name = "title")
@@ -19,9 +20,9 @@ public class Tutorial {
     private String description;
 
     @Column(name = "published")
-    private boolean published;
+    private String published;
 
-    public Tutorial(String title, String description, boolean published) {
+    public Tutorial(String title, String description, String published) {
            this.title = title;
            this.description=description;
            this.published=published;
