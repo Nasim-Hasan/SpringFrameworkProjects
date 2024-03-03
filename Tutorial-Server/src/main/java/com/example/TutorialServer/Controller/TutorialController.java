@@ -19,7 +19,7 @@ public class TutorialController {
     @Autowired
     TutorialRepository tutorialRepository;
 
-/*    @GetMapping("/tutorials")
+    @GetMapping("/tutorials")
     public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title) {
         try {
             List<Tutorial> tutorials = new ArrayList<Tutorial>();
@@ -40,7 +40,7 @@ public class TutorialController {
 
     }
 
-    @GetMapping("/tutorials/{id}")
+    @GetMapping("/tutorial/{id}")
     public ResponseEntity<Tutorial> getTutorialById(@PathVariable("id") long id) {
         Optional<Tutorial> tutorialData = tutorialRepository.findById(id);
 
@@ -50,7 +50,7 @@ public class TutorialController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-    }*/
+    }
 
     @PostMapping("/tutorials")
     public ResponseEntity<Tutorial> createTutorial(@RequestBody Tutorial tutorial) {
@@ -63,8 +63,7 @@ public class TutorialController {
         }
 
     }
-
-   /* @PutMapping("/tutorials/{id}")
+    @PutMapping("/tutorials/{id}")
     public ResponseEntity<Tutorial> updateTutorial(@PathVariable("id") long id, @RequestBody Tutorial tutorial) {
         Optional<Tutorial> tutorialData = tutorialRepository.findById(id);
 
@@ -72,7 +71,7 @@ public class TutorialController {
             Tutorial _tutorial = tutorialData.get();
             _tutorial.setTitle(tutorial.getTitle());
             _tutorial.setDescription(tutorial.getDescription());
-            _tutorial.setPublished(tutorial.isPublished());
+            _tutorial.setPublished(tutorial.getPublished());
             return new ResponseEntity<>(tutorialRepository.save(_tutorial), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -103,7 +102,7 @@ public class TutorialController {
     @GetMapping("/tutorials/published")
     public ResponseEntity<List<Tutorial>> findByPublished() {
         try {
-            List<Tutorial> tutorials = tutorialRepository.findByPublished(true);
+            List<Tutorial> tutorials = tutorialRepository.findByPublished("true");
 
             if (tutorials.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -127,6 +126,6 @@ public class TutorialController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }*/
+    }
 
 }
