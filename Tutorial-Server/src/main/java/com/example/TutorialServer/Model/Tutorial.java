@@ -22,6 +22,8 @@ public class Tutorial {
     @Column(name = "published")
     private String published;
 
+    public Tutorial(){}
+
     public Tutorial(String title, String description, String published) {
            this.title = title;
            this.description=description;
